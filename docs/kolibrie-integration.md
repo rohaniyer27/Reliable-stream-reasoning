@@ -27,9 +27,9 @@ test result: ok. 1 passed; 0 failed
 
 **Interpretation:** This is a successful smoke/probe execution, **not** evidence that Kolibrie incorrectly handles late observations. The exploratory test does not assert a nonempty result or establish an ordered-arrival control; no probability difference or correctness claim is supported. The test also uses an existing rule with a 0.7 threshold. Next, add matched ordered and reversed-arrival controls, inspect window firing, and assert expected outputs only after establishing equivalent temporal semantics.
 
-## Follow-on experiment (not implemented)
+## Matched control experiment (implemented; not yet executed)
 
-Implement a pinned Kolibrie harness that uses rules and probabilistic events equivalent to the Python reference, with explicit event-time windows, correction and retraction semantics. Compare only when the operations and inferred propositions represent the same semantics. Rebuilding a fresh engine from corrected events provides a baseline; differences under identical semantics are a correctness question, while deliberate approximation provides a research trade-off.
+A new probe now compares ordered and reversed arrival using the same Kolibrie query, rule and trigger timestamp, asserting that both produce at least one exact probability and that their sorted outputs match. It uses `RSPEngine::latest_hybrid_results`, a public Rust method in v0.2.0 source, but not a documented stable external interface. This is an integration detail subject to upstream changes. The new probe is not yet validated by GitHub Actions. Future work must still implement correction and retraction semantics equivalent to the Python reference. Compare only when the operations and inferred propositions represent the same semantics. Rebuilding a fresh engine from corrected events provides a baseline; differences under identical semantics are a correctness question, while deliberate approximation provides a research trade-off.
 
 Only the bounded observation above is verified. Correction/retraction comparisons and accuracy measurements remain pending.
 
