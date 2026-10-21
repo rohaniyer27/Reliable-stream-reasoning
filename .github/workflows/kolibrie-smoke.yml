@@ -1,0 +1,38 @@
+name: Kolibrie v0.2.0 smoke test
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - ".github/workflows/kolibrie-smoke.yml"
+      - "docs/kolibrie-integration.md"
+
+jobs:
+  upstream-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout Kolibrie v0.2.0
+        uses: actions/checkout@v4
+        with:
+          repository: StreamIntelligenceLab/Kolibrie
+          ref: v0.2.0
+          path: kolibrie-upstream
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: kolibrie-upstream
+      - name: Record upstream version
+        working-directory: kolibrie-upstream
+        run: |
+          git rev-parse HEAD
+          rustc --version
+          cargo --version
+      - name: Test probabilistic stream event identities
+        working-directory: kolibrie-upstream
+        run: cargo test -p kolibrie --test rsp_engine_test rsp_probabilistic_occurrences_keep_stable_distinct_seed_ids -- --exact --nocapture
+      - name: Test probabilistic proof combination
+        working-directory: kolibrie-upstream
+        run: cargo test -p kolibrie --test probabilistic_program_test probabilistic_rules_combine_every_proof_in_any_order -- --exact --nocapture
