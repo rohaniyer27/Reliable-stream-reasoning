@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
+      - name: Checkout experiment repository
+        uses: actions/checkout@v4
+        with:
+          path: research-project
       - name: Checkout Kolibrie v0.2.0
         uses: actions/checkout@v4
         with:
@@ -34,7 +38,7 @@ jobs:
         working-directory: kolibrie-upstream
         run: cargo test -p kolibrie --test rsp_engine_test rsp_probabilistic_occurrences_keep_stable_distinct_seed_ids -- --exact --nocapture
       - name: Inject exploratory late-observation test
-        run: cat experiments/late_observation_probe.rs >> kolibrie-upstream/kolibrie/tests/rsp_engine_test.rs
+        run: cat research-project/experiments/late_observation_probe.rs >> kolibrie-upstream/kolibrie/tests/rsp_engine_test.rs
       - name: Run exploratory late-observation test
         working-directory: kolibrie-upstream
         run: cargo test -p kolibrie --test rsp_engine_test external_probe_late_probabilistic_observation -- --exact --nocapture
