@@ -26,8 +26,8 @@ The project builds on established work. **Kolibrie v0.2.0** already includes Dat
 | Python event-time reference model | Complete | [Implementation](src/reference_probe.py) |
 | Python regression tests | Passed in GitHub Actions | [Workflow](.github/workflows/reference-tests.yml) |
 | Kolibrie v0.2.0 upstream probabilistic tests | Passed | [Verified run](https://github.com/rohaniyer27/Reliable-stream-reasoning/actions/runs/39619121102) |
-| Custom late-observation Kolibrie probe | Executed; exploratory output recorded | [Rust probe](experiments/late_observation_probe.rs) · [Research log](docs/kolibrie-integration.md) |
-| Matched ordered / reversed-arrival comparison | Implemented; execution pending | [Experiment protocol](docs/experiment_protocol.md) |
+| Initial late-observation probe | Executed; produced zero derived results under initial configuration | [Research log](docs/kolibrie-integration.md) |
+| Matched ordered / reversed-arrival comparison | **Passed — [0.8, 0.9] in both conditions** | [Verified run](https://github.com/rohaniyer27/Reliable-stream-reasoning/actions/runs/39631296715) · [Rust test](experiments/late_observation_probe.rs) |
 | Correction and retraction comparison | Not implemented | [Experiment protocol](docs/experiment_protocol.md) |
 | Real turbine-data case study | Not started | [Research concept](docs/research_concept.md) |
 
@@ -39,20 +39,19 @@ The dependency-free reference model defines the event-time window as `cutoff - w
 
 ### Kolibrie integration — 21 October 2026
 
-A GitHub Actions workflow checked out Kolibrie **v0.2.0**, compiled it and passed two selected existing upstream tests plus our own exploratory late-observation test.
+The first exploratory probe executed, but returned zero derived results in its initial configuration. We subsequently introduced matched **ordered** and **reversed-arrival** controls with assertions requiring nonempty outputs and matching probability vectors.
 
-Our custom test inserted a probabilistic observation with event time 2 and probability 0.8, followed by one with event time 1 and probability 0.9. The run reported:
+The revised Kolibrie v0.2.0 test passed on GitHub Actions:
 
 ```text
-late-observation probe: newest event ts=2 before older event ts=1
-latest_hybrid_results exists: true
-derived result count: 0
+reverse=false: exact probabilities=[0.8, 0.9]
+reverse=true: exact probabilities=[0.8, 0.9]
 test external_probe_late_probabilistic_observation ... ok
 ```
 
-**Interpretation:** The first probe executed, but the zero results do not establish correctness or a flaw. A new ordered-versus-reversed comparison with nonempty-result and probability assertions is committed but has not yet been run.
+The maximum absolute difference between the **sorted** probability vectors was **0.00**. This demonstrates consistency for these observations under the tested rule and window configuration, not general late-event correctness: fact identity, provenance, and intermediate states were not compared. Correction and retraction experiments remain future work.
 
-See the [integration log](docs/kolibrie-integration.md) and [successful workflow run](https://github.com/rohaniyer27/Reliable-stream-reasoning/actions/runs/39619121102).
+See the [experiment log](docs/kolibrie-integration.md) and [verified Actions run](https://github.com/rohaniyer27/Reliable-stream-reasoning/actions/runs/39631296715).
 
 ## Reproduce
 
