@@ -1,6 +1,6 @@
 # Reliability-Aware Stream Reasoning for Offshore Digital Twins
 
-A reproducible, exploratory research workspace developed in preparation for a KU Leuven PhD application. The focus is on **probabilistic and temporal stream reasoning**, evidence revision, and evaluation under constrained computing resources.
+An independent, reproducible research workspace exploring reliability in probabilistic and temporal stream reasoning for offshore digital twins. The focus is on **probabilistic and temporal stream reasoning**, evidence revision, and evaluation under constrained computing resources.
 
 > [!IMPORTANT]
 > **Research status: exploratory.** The reference experiments in this repository are written in Python and **do not run Kolibrie**. They demonstrate specified event-time semantics, not a defect in Kolibrie, a new inference algorithm, or results from offshore SCADA data.
@@ -60,4 +60,4 @@ The proposed CARE to Compare wind-turbine case study uses anonymised SCADA summa
 - [Uncertainty annotations and provenance in RDF streams (CEUR)](https://ceur-ws.org/Vol-4293/paper18.pdf)
 - [CARE to Compare dataset (Zenodo)](https://zenodo.org/records/14006163)
 
-This is independent exploratory application preparation and is not an official KU Leuven or Stream Intelligence Lab project.
+Independent research prototype. Not affiliated with, endorsed by, or an official project of KU Leuven or the Stream Intelligence Lab.
