@@ -7,7 +7,7 @@
 
 An independent, reproducible research prototype investigating how temporal and probabilistic stream-reasoning systems behave when evidence arrives out of order, changes, or expires. Offshore cognitive digital twins motivate the work; the first experiments use synthetic observations to isolate system semantics.
 
-> **Project maturity:** Exploratory prototype. Python reference tests and a Kolibrie v0.2.0 integration smoke test have executed successfully. **No novel inference algorithm, Kolibrie defect, or validated improvement is claimed.**
+> **Status:** Exploratory. Reference tests and a Kolibrie smoke test have passed; controlled comparison results are pending. No novel method or Kolibrie defect is claimed.
 
 ## Research focus
 
@@ -27,7 +27,7 @@ The project builds on established work. **Kolibrie v0.2.0** already includes Dat
 | Python regression tests | Passed in GitHub Actions | [Workflow](.github/workflows/reference-tests.yml) |
 | Kolibrie v0.2.0 upstream probabilistic tests | Passed | [Verified run](https://github.com/rohaniyer27/Reliable-stream-reasoning/actions/runs/39619121102) |
 | Custom late-observation Kolibrie probe | Executed; exploratory output recorded | [Rust probe](experiments/late_observation_probe.rs) · [Research log](docs/kolibrie-integration.md) |
-| Matched ordered / reversed-arrival comparison | Not implemented | [Experiment protocol](docs/experiment_protocol.md) |
+| Matched ordered / reversed-arrival comparison | Implemented; execution pending | [Experiment protocol](docs/experiment_protocol.md) |
 | Correction and retraction comparison | Not implemented | [Experiment protocol](docs/experiment_protocol.md) |
 | Real turbine-data case study | Not started | [Research concept](docs/research_concept.md) |
 
@@ -50,7 +50,7 @@ derived result count: 0
 test external_probe_late_probabilistic_observation ... ok
 ```
 
-**Interpretation:** The test executed and queried the result interface successfully. The zero derived-results count belongs to this particular window/rule configuration and is **not evidence of incorrect late-event handling**. The probe does not yet have an ordered-arrival control, a probability comparison, or assertions about output correctness. The next experiment will provide those controls.
+**Interpretation:** The first probe executed, but the zero results do not establish correctness or a flaw. A new ordered-versus-reversed comparison with nonempty-result and probability assertions is committed but has not yet been run.
 
 See the [integration log](docs/kolibrie-integration.md) and [successful workflow run](https://github.com/rohaniyer27/Reliable-stream-reasoning/actions/runs/39619121102).
 
@@ -102,4 +102,4 @@ The proposed offshore case study may draw on the [CARE to Compare](https://zenod
 
 ---
 
-Independent exploratory work. Not affiliated with, endorsed by, or an official project of KU Leuven or its Stream Intelligence Lab.
+Independent project; not affiliated with KU Leuven or its Stream Intelligence Lab.
