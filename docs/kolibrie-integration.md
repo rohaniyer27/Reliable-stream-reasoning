@@ -2,7 +2,7 @@
 
 ## Status
 
-**Pending execution.** The workflow `.github/workflows/kolibrie-smoke.yml` runs two **existing upstream Kolibrie v0.2.0 tests** on GitHub Actions. It does not yet test our own correction/retraction hypotheses.
+**Executed successfully on 21 October 2026.** The workflow `.github/workflows/kolibrie-smoke.yml` runs two **existing upstream Kolibrie v0.2.0 tests** on GitHub Actions. It also runs a custom late-observation probe. It does not yet test our own correction/retraction hypotheses with controlled comparisons.
 
 ## Why these tests?
 
